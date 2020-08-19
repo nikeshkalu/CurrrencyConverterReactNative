@@ -1,6 +1,10 @@
 import React from 'react'
-import {View, StyleSheet, StatusBar,Image,Dimensions} from 'react-native'
+import {View, StyleSheet, StatusBar,Image,Dimensions,Text} from 'react-native'
 import colors from '../constants/colors'
+import {ConversionInput} from '../components/ConversionInput'
+import { format } from 'date-fns';
+import { Button } from '../components/Button';
+
 
 const screen = Dimensions.get('window')
 
@@ -13,8 +17,7 @@ const style = StyleSheet.create({
     logoContainer : {
         alignItems : "center",
         justifyContent : "center",
-        marginTop: 125
-        
+        marginTop: 140
     },
     logoBackground : {
         width : screen.width * 0.45,
@@ -26,9 +29,29 @@ const style = StyleSheet.create({
         height : screen.width * 0.25
 
     },
+    textHeader: {
+        color: colors.white,
+        fontWeight: 'bold',
+        fontSize: 30,
+        textAlign: 'center',
+        marginBottom: 20,
+    },
+    text: {
+        fontSize: 14,
+        color: colors.white,
+        textAlign: 'center',
+      },
+    inputContainer: {
+        marginBottom: 10,
+      },
 })
 
 export default ()=> {
+    const baseCurrency = 'USD';
+    const quoteCurrency = 'GBP';
+    const conversionRate = 0.89824;
+    const date = '2020-03-23';
+
     return(
         <View style={style.container}>
             <StatusBar barStyle="light-content" backgroundColor={colors.blue} />
@@ -42,6 +65,32 @@ export default ()=> {
                 style={style.logo}
                 resizeMode="contain"/>
             </View>
+            
+            <Text style={style.textHeader}>Currency Converter</Text>
+            <View style={style.inputContainer}>
+                <ConversionInput
+                    text={baseCurrency}
+                    value="123"
+                    onButtonPress={() => alert('todo!')}
+                    keyboardType="numeric"
+                    onChangeText={text => console.log('text', text)}
+                />
+                <ConversionInput
+                    text={quoteCurrency}
+                    value="123"
+                    onButtonPress={() => alert('todo!')}
+                    editable = {false}
+                />
+            </View>
+
+            <Text style={style.text}>
+                    {`1 ${baseCurrency} = ${conversionRate} ${quoteCurrency} as of ${format(
+                    new Date(date),
+                    'MMM do, yyyy'
+                    )}`}
+                </Text>
+            
+            <Button text="Reverse Currencies" onPress={() => alert('todo!')} />
         </View>
     )
 }
