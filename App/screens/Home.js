@@ -1,9 +1,12 @@
 import React from 'react'
-import {View, StyleSheet, StatusBar,Image,Dimensions,Text} from 'react-native'
+import {View, StyleSheet, StatusBar,Image,Dimensions,Text,TouchableOpacity} from 'react-native'
 import colors from '../constants/colors'
 import {ConversionInput} from '../components/ConversionInput'
 import { format } from 'date-fns';
 import { Button } from '../components/Button';
+import { Entypo } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 
 const screen = Dimensions.get('window')
@@ -44,9 +47,13 @@ const style = StyleSheet.create({
     inputContainer: {
         marginBottom: 10,
       },
+      header: {
+        alignItems: 'flex-end',
+        marginHorizontal: 20,
+      },
 })
 
-export default ()=> {
+export default ({navigation})=> {
     const baseCurrency = 'USD';
     const quoteCurrency = 'GBP';
     const conversionRate = 0.89824;
@@ -55,6 +62,13 @@ export default ()=> {
     return(
         <View style={style.container}>
             <StatusBar barStyle="light-content" backgroundColor={colors.blue} />
+            <SafeAreaView style={style.header}>
+                <TouchableOpacity onPress={() => navigation.push('Options')}>
+                    <Entypo name="cog" size={32} color={colors.white} />
+                </TouchableOpacity>
+            </SafeAreaView>
+
+
             <View style={style.logoContainer}>
             <Image 
                 source={require("../assets/images/background.png")}

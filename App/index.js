@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './screens/Home';
+import Navigation from './config/Navigation';
 
 // const styles = StyleSheet.create({
 //     container: {
@@ -12,7 +13,7 @@ import Home from './screens/Home';
 //     },
 //   });
   
-  export default () => <Home />;
+  export default () => <Navigation />;
 
 // export default function App() {
 //   return (
