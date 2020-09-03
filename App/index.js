@@ -3,6 +3,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './screens/Home';
 import Navigation from './config/Navigation';
+import { ConversionContextProvider } from './util/ConversionContext';
+
 
 // const styles = StyleSheet.create({
 //     container: {
@@ -13,7 +15,11 @@ import Navigation from './config/Navigation';
 //     },
 //   });
   
-  export default () => <Navigation />;
+  export default () => ( 
+    <ConversionContextProvider>
+      <Navigation />
+    </ConversionContextProvider>
+  )
 
 // export default function App() {
 //   return (
