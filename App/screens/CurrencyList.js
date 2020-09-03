@@ -45,9 +45,11 @@ export default ({ navigation, route = {} }) => {
         renderItem={({ item }) => {
           // const selected = activeCurrency === item;
           let selected = false
-          if(isBaseCurrency && item == baseCurrency){
+
+          if(isBaseCurrency && item === baseCurrency){
             selected = true
-          }else if(!isBaseCurrency && item == quoteCurrency){
+          }
+          else if(!isBaseCurrency && item === quoteCurrency){
             selected = true
           }
 
@@ -56,7 +58,7 @@ export default ({ navigation, route = {} }) => {
               title={item}
               onPress={() => {
                 
-                if (params.isBaseCurrency) {
+                if (isBaseCurrency) {
                   setBaseCurrency(item);
                 } else {
                   setQuoteCurrency(item);

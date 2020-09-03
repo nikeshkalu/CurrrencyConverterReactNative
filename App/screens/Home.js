@@ -58,13 +58,15 @@ export default ({navigation})=> {
         baseCurrency,
         quoteCurrency,
         swapCurrencies,
+        date,
+        rates
       } = useContext(ConversionContext);
     // const [baseCurrency, setBaseCurrency] = useState('USD');
     // const [quoteCurrency, setQuoteCurrency] = useState('GBP');
     const [value, setValue] = useState('100');
 
-    const conversionRate = 0.89824;
-    const date = '2020-03-23';
+    const conversionRate = rates[quoteCurrency];
+    // const date = '2020-03-23';
 
     // const swapCurrencies = () => {
     //     setBaseCurrency(quoteCurrency);
@@ -99,7 +101,7 @@ export default ({navigation})=> {
                     value={value}
                     onButtonPress={() => navigation.push('CurrencyList', {
                         title: 'Base Currency',
-                        isBaseCurrrency : true,
+                        isBaseCurrency : true
                       })}
                     keyboardType="numeric"
                     onChangeText={text => setValue(text)}
@@ -109,14 +111,14 @@ export default ({navigation})=> {
                     value={value && `${(parseFloat(value) * conversionRate).toFixed(2)}`}
                     onButtonPress={() => navigation.push('CurrencyList',{ 
                         title: 'Quote Currency' ,
-                        isBaseCurrrency : false,
+                        isBaseCurrency : false
                     })}
                     editable = {false}
                 />
             </View>
 
             <Text style={style.text}>
-                    {`1 ${baseCurrency} = ${conversionRate} ${quoteCurrency} as of ${format(
+                    {`1 ${baseCurrency} = ${conversionRate} ${quoteCurrency} as of ${date && format(
                     new Date(date),
                     'MMM do, yyyy'
                     )}`}
